@@ -36,7 +36,7 @@ export const specialists: Specialist[] = [
   {
     id: "2",
     name: "Артём Лебедев",
-    photo: "https://randomuser.me/api/portraits/men/77.jpg",
+    photo: "https://randomuser.me/api/portraits/men/45.jpg",
     role: "Коуч",
     specialization: "Мотивация и борьба с выгоранием",
     experienceYears: 7,
@@ -72,7 +72,7 @@ export const specialists: Specialist[] = [
   {
     id: "5",
     name: "Юлия Зайцева",
-    photo: "https://randomuser.me/api/portraits/women/30.jpg",
+    photo: "https://randomuser.me/api/portraits/women/57.jpg",
     role: "Коуч",
     specialization: "Уверенность и публичные выступления",
     experienceYears: 8,
