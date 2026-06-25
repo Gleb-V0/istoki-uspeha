@@ -76,6 +76,9 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Мягкий брендовый фон-градиент для секций-заглушек */
@@ -83,4 +86,58 @@
   background-image:
     radial-gradient(60% 60% at 20% 0%, hsl(213 97% 93% / 0.9) 0%, transparent 60%),
     radial-gradient(50% 50% at 100% 10%, hsl(214 95% 93% / 0.8) 0%, transparent 55%);
+}
+
+/* ── Лёгкие анимации ── */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-rise {
+  animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-pop {
+  animation: pop 0.2s ease-out both;
+}
+.animate-fade {
+  animation: fade 0.2s ease-out both;
+}
+
+/* Уважаем системную настройку «уменьшить движение» */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

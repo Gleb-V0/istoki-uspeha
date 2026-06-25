@@ -88,7 +88,7 @@ export default function HomePage() {
     <>
       {/* ─── Hero ─── */}
       <section className="brand-gradient">
-        <div className="container flex flex-col items-center py-20 text-center sm:py-28">
+        <div className="container flex flex-col items-center py-20 text-center sm:py-28 animate-rise">
           <Badge variant="soft" className="gap-1.5">
             <Sparkles className="h-3.5 w-3.5" />
             Для школьников 9–11 классов

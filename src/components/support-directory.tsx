@@ -38,7 +38,7 @@ export function SupportDirectory({ specialists }: { specialists: Specialist[] })
     <>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {specialists.map((s) => (
-          <Card key={s.id} className="flex flex-col">
+          <Card key={s.id} className="flex flex-col transition-shadow duration-200 hover:shadow-md">
             <CardContent className="flex flex-1 flex-col p-6">
               <div className="flex items-center gap-3">
                 <Image

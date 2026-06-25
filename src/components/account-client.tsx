@@ -223,7 +223,7 @@ export function AccountClient() {
             <Link
               key={link.href}
               href={link.href}
-              className="group flex flex-col items-center gap-2 rounded-2xl border bg-card p-5 text-center transition-colors hover:border-primary/40 hover:bg-accent/40"
+              className="group flex flex-col items-center gap-2 rounded-2xl border bg-card p-5 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-accent/40 hover:shadow-md"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-primary">
                 <link.icon className="h-5 w-5" />

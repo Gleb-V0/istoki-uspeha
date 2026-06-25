@@ -35,7 +35,7 @@ export function CommunityCard({ community }: { community: Community }) {
   const Icon = iconMap[community.icon];
 
   return (
-    <Card className="flex flex-col overflow-hidden">
+    <Card className="flex flex-col overflow-hidden transition-shadow duration-200 hover:shadow-md">
       {/* Заголовок чата */}
       <div className="flex items-start gap-3 p-5">
         <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-sm">

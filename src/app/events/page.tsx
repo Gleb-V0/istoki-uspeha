@@ -16,7 +16,7 @@ export default function EventsPage() {
     <>
       {/* Шапка раздела */}
       <section className="brand-gradient">
-        <div className="container flex flex-col items-center py-16 text-center sm:py-20">
+        <div className="container flex flex-col items-center py-16 text-center sm:py-20 animate-rise">
           <Badge variant="soft" className="gap-1.5">
             <CalendarDays className="h-3.5 w-3.5" />
             Мероприятия

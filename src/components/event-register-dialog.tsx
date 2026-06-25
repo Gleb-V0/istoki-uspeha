@@ -65,12 +65,12 @@ export function EventRegisterDialog({
       aria-labelledby="event-title"
     >
       <div
-        className="absolute inset-0 bg-foreground/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-foreground/40 backdrop-blur-sm animate-fade"
         onClick={onClose}
         aria-hidden
       />
 
-      <div className="relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl border bg-card p-6 shadow-xl sm:rounded-3xl sm:p-7">
+      <div className="relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl border bg-card p-6 shadow-xl animate-pop sm:rounded-3xl sm:p-7">
         <button
           type="button"
           onClick={onClose}

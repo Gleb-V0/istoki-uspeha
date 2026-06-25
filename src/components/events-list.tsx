@@ -71,7 +71,7 @@ function EventRow({
   const d = formatEventDate(event.date);
 
   return (
-    <Card className="flex flex-col gap-4 p-5 sm:flex-row sm:items-stretch sm:gap-5">
+    <Card className="flex flex-col gap-4 p-5 transition-shadow duration-200 hover:shadow-md sm:flex-row sm:items-stretch sm:gap-5">
       {/* Календарная плитка */}
       <div className="flex shrink-0 items-center gap-3 sm:w-24 sm:flex-col sm:items-center sm:justify-center sm:gap-0 sm:rounded-2xl sm:bg-accent sm:py-3 sm:text-primary">
         <span className="text-3xl font-bold leading-none sm:text-primary">

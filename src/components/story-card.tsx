@@ -9,7 +9,7 @@ import type { Story } from "@/data/stories";
 /** Карточка истории успеха в ленте. Вся карточка — ссылка на полную историю. */
 export function StoryCard({ story }: { story: Story }) {
   return (
-    <Card className="group relative flex flex-col overflow-hidden hover:shadow-md focus-within:ring-2 focus-within:ring-ring">
+    <Card className="group relative flex flex-col overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg focus-within:ring-2 focus-within:ring-ring">
       <CardContent className="flex flex-1 flex-col p-6">
         <div className="flex items-center gap-3">
           <Image

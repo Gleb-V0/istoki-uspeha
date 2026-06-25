@@ -65,6 +65,40 @@ npm run start    # запуск production-сборки
 npm run lint     # проверка ESLint
 ```
 
+## Деплой на Vercel
+
+Проект — стандартное Next.js-приложение, Vercel определяет его автоматически
+(никакой особой настройки и переменных окружения не нужно).
+
+**Вариант А — через сайт Vercel (рекомендуется):**
+
+1. Залей репозиторий на GitHub (или GitLab/Bitbucket):
+   ```bash
+   git remote add origin https://github.com/<логин>/istoki-uspeha.git
+   git push -u origin main
+   ```
+2. Зайди на <https://vercel.com>, войди через GitHub.
+3. **Add New… → Project** → выбери репозиторий `istoki-uspeha` → **Import**.
+4. Настройки определятся сами (Framework: Next.js, Build: `next build`,
+   Output: `.next`). Ничего менять не нужно — нажми **Deploy**.
+5. Через ~1–2 минуты получишь публичную ссылку вида
+   `https://istoki-uspeha.vercel.app`.
+
+После этого каждый `git push` в ветку `main` будет автоматически
+пересобирать и обновлять сайт.
+
+**Вариант Б — через Vercel CLI (без GitHub):**
+
+```bash
+npm i -g vercel   # установить CLI
+vercel            # первый запуск: вопросы по проекту → preview-ссылка
+vercel --prod     # выложить в продакшен и получить публичную ссылку
+```
+
+> Внешние фото-портреты подгружаются с `randomuser.me` — этот хост уже разрешён
+> в `next.config.mjs` (`images.remotePatterns`), на Vercel картинки работают без
+> дополнительной настройки.
+
 ## Добавление компонентов shadcn/ui
 
 Проект настроен под shadcn/ui (`components.json`), поэтому новые компоненты можно ставить так:

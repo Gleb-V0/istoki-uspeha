@@ -30,12 +30,12 @@ export function AuthDialog() {
       aria-label="Вход и регистрация"
     >
       <div
-        className="absolute inset-0 bg-foreground/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-foreground/40 backdrop-blur-sm animate-fade"
         onClick={closeAuth}
         aria-hidden
       />
 
-      <div className="relative z-10 max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-3xl border bg-card p-6 shadow-xl sm:rounded-3xl sm:p-7">
+      <div className="relative z-10 max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-3xl border bg-card p-6 shadow-xl animate-pop sm:rounded-3xl sm:p-7">
         <button
           type="button"
           onClick={closeAuth}
