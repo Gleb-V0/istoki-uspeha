@@ -213,7 +213,7 @@ export const stories: Story[] = [
     id: "8",
     slug: "proval-pervogo-biznesa",
     name: "Руслан Хаялов",
-    photo: "https://randomuser.me/api/portraits/men/83.jpg",
+    photo: "https://randomuser.me/api/portraits/men/41.jpg",
     role: "Предприниматель, основатель IT-компании",
     field: "Предпринимательство",
     challenge: "Провал первого проекта и страх начать заново",
