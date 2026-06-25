@@ -1,6 +1,8 @@
 export type Specialist = {
   id: string;
   name: string;
+  /** Портрет (фото-заглушка; заменяется на реальное лицензированное фото). */
+  photo: string;
   /** Роль на платформе. */
   role: "Психолог" | "Коуч" | "Профориентолог";
   /** Краткая специализация. */
@@ -22,6 +24,7 @@ export const specialists: Specialist[] = [
   {
     id: "1",
     name: "Елена Кравцова",
+    photo: "https://randomuser.me/api/portraits/women/68.jpg",
     role: "Психолог",
     specialization: "Подростковая тревожность и стресс",
     experienceYears: 9,
@@ -33,6 +36,7 @@ export const specialists: Specialist[] = [
   {
     id: "2",
     name: "Артём Лебедев",
+    photo: "https://randomuser.me/api/portraits/men/77.jpg",
     role: "Коуч",
     specialization: "Мотивация и борьба с выгоранием",
     experienceYears: 7,
@@ -44,6 +48,7 @@ export const specialists: Specialist[] = [
   {
     id: "3",
     name: "Марина Фомина",
+    photo: "https://randomuser.me/api/portraits/women/50.jpg",
     role: "Профориентолог",
     specialization: "Выбор профессии и сильные стороны",
     experienceYears: 11,
@@ -55,6 +60,7 @@ export const specialists: Specialist[] = [
   {
     id: "4",
     name: "Сергей Доронин",
+    photo: "https://randomuser.me/api/portraits/men/52.jpg",
     role: "Психолог",
     specialization: "Отношения со сверстниками и одиночество",
     experienceYears: 6,
@@ -66,6 +72,7 @@ export const specialists: Specialist[] = [
   {
     id: "5",
     name: "Юлия Зайцева",
+    photo: "https://randomuser.me/api/portraits/women/30.jpg",
     role: "Коуч",
     specialization: "Уверенность и публичные выступления",
     experienceYears: 8,
@@ -77,6 +84,7 @@ export const specialists: Specialist[] = [
   {
     id: "6",
     name: "Игорь Беляев",
+    photo: "https://randomuser.me/api/portraits/men/36.jpg",
     role: "Профориентолог",
     specialization: "ИТ и инженерные направления",
     experienceYears: 10,
