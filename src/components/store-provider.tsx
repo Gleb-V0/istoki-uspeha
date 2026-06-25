@@ -33,9 +33,10 @@ type Persisted = {
 type Store = Persisted & {
   hydrated: boolean;
   authOpen: boolean;
+  authMessage: string | null;
   login: (name: string) => void;
   logout: () => void;
-  openAuth: () => void;
+  openAuth: (message?: string) => void;
   closeAuth: () => void;
   addConsultation: (c: Omit<Consultation, "id" | "createdAt">) => void;
   addEvent: (e: Omit<EventBooking, "id" | "createdAt">) => void;
@@ -68,6 +69,7 @@ export function useStore(): Store {
 export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [data, setData] = React.useState<Persisted>(defaultData);
   const [authOpen, setAuthOpen] = React.useState(false);
+  const [authMessage, setAuthMessage] = React.useState<string | null>(null);
   const [hydrated, setHydrated] = React.useState(false);
 
   // Загрузка сохранённого состояния после монтирования (избегаем рассинхрона SSR).
@@ -95,11 +97,18 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     ...data,
     hydrated,
     authOpen,
+    authMessage,
     login: (name) =>
       setData((d) => ({ ...d, user: { name: name.trim() || "Друг" } })),
     logout: () => setData((d) => ({ ...d, user: null })),
-    openAuth: () => setAuthOpen(true),
-    closeAuth: () => setAuthOpen(false),
+    openAuth: (message) => {
+      setAuthMessage(typeof message === "string" ? message : null);
+      setAuthOpen(true);
+    },
+    closeAuth: () => {
+      setAuthOpen(false);
+      setAuthMessage(null);
+    },
     addConsultation: (c) =>
       setData((d) => ({
         ...d,

@@ -27,25 +27,35 @@ export function SiteFooter() {
             </p>
           </div>
 
-          {footerNav.map((group) => (
-            <div key={group.title}>
-              <h3 className="text-sm font-semibold text-foreground">
-                {group.title}
-              </h3>
-              <ul className="mt-4 space-y-2.5">
-                {group.items.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {footerNav.map((group) => {
+            // Активны только ссылки раздела «Платформа»; остальные — неактивны.
+            const isActive = group.title === "Платформа";
+            return (
+              <div key={group.title}>
+                <h3 className="text-sm font-semibold text-foreground">
+                  {group.title}
+                </h3>
+                <ul className="mt-4 space-y-2.5">
+                  {group.items.map((item) => (
+                    <li key={item.href}>
+                      {isActive ? (
+                        <Link
+                          href={item.href}
+                          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        >
+                          {item.title}
+                        </Link>
+                      ) : (
+                        <span className="cursor-default text-sm text-muted-foreground">
+                          {item.title}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
 
         <div className="mt-10 border-t pt-6 text-sm text-muted-foreground">

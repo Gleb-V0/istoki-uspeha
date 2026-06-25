@@ -27,7 +27,7 @@ export function HeaderAuth() {
       variant="outline"
       size="sm"
       className="hidden sm:inline-flex"
-      onClick={openAuth}
+      onClick={() => openAuth()}
     >
       <LogIn className="h-4 w-4" />
       Вход / Регистрация

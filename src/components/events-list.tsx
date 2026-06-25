@@ -7,8 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { EventRegisterDialog } from "@/components/event-register-dialog";
+import { useStore } from "@/components/store-provider";
 import { formatEventDate, seatsLabel } from "@/lib/format";
 import type { PlatformEvent } from "@/data/events";
+
+const AUTH_REQUIRED_MESSAGE =
+  "Чтобы записаться, вам необходимо для начала создать или войти в аккаунт.";
 
 /** Группирует мероприятия по месяцам (данные уже отсортированы по дате). */
 function groupByMonth(events: PlatformEvent[]) {
@@ -26,7 +30,14 @@ function groupByMonth(events: PlatformEvent[]) {
 /** Лента мероприятий с записью (имитация). */
 export function EventsList({ events }: { events: PlatformEvent[] }) {
   const [selected, setSelected] = React.useState<PlatformEvent | null>(null);
+  const { user, hydrated, openAuth } = useStore();
   const groups = groupByMonth(events);
+
+  // Запись доступна только после входа в аккаунт.
+  function handleRegister(ev: PlatformEvent) {
+    if (hydrated && user) setSelected(ev);
+    else openAuth(AUTH_REQUIRED_MESSAGE);
+  }
 
   return (
     <>
@@ -38,7 +49,7 @@ export function EventsList({ events }: { events: PlatformEvent[] }) {
             </h2>
             <div className="mt-4 space-y-4">
               {group.items.map((ev) => (
-                <EventRow key={ev.id} event={ev} onRegister={() => setSelected(ev)} />
+                <EventRow key={ev.id} event={ev} onRegister={() => handleRegister(ev)} />
               ))}
             </div>
           </div>

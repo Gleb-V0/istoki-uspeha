@@ -62,9 +62,9 @@ export function AccountClient() {
             статус подписки.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button size="lg" onClick={openAuth}>
+            <Button size="lg" onClick={() => openAuth()}>
               <LogIn className="h-4 w-4" />
-              Войти / Регистрация
+              Вход / Регистрация
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="/">На главную</Link>
@@ -118,7 +118,7 @@ export function AccountClient() {
           </div>
           {isPremium ? (
             <Button variant="outline" onClick={() => setSubscription("free")}>
-              Отменить (демо)
+              Отменить
             </Button>
           ) : (
             <Button asChild>

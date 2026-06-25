@@ -9,7 +9,7 @@ import { useStore } from "@/components/store-provider";
 
 /** Модальное окно входа/регистрации, управляется глобальным стором. */
 export function AuthDialog() {
-  const { authOpen, closeAuth } = useStore();
+  const { authOpen, authMessage, closeAuth } = useStore();
 
   React.useEffect(() => {
     if (!authOpen) return;
@@ -51,7 +51,8 @@ export function AuthDialog() {
             Вход в «Истоки успеха»
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Войдите или зарегистрируйтесь, чтобы открыть личный кабинет.
+            {authMessage ??
+              "Войдите или зарегистрируйтесь, чтобы открыть личный кабинет."}
           </p>
         </div>
 

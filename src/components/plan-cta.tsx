@@ -17,7 +17,8 @@ export function PlanCta({
   label: string;
 }) {
   const { user, subscription, hydrated, openAuth } = useStore();
-  const isPremium = subscription === "premium";
+  // Статус тарифа учитывается только когда пользователь вошёл в аккаунт.
+  const isPremium = !!user && subscription === "premium";
 
   if (planKey === "free") {
     // Премиум-подписчику кнопка бесплатного тарифа не нужна.
@@ -35,7 +36,7 @@ export function PlanCta({
         variant="outline"
         size="lg"
         className="mt-7 w-full"
-        onClick={openAuth}
+        onClick={() => openAuth()}
       >
         {label}
       </Button>

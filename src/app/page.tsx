@@ -105,7 +105,7 @@ export default function HomePage() {
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             «Истоки успеха» — онлайн-платформа, которая помогает справляться со
             стрессом, находить близких по духу людей и раскрывать свой потенциал.
-            Без давления оценок — с заботой о ментальном здоровье.
+            Здесь ты не один!
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

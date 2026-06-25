@@ -8,7 +8,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookingDialog } from "@/components/booking-dialog";
+import { useStore } from "@/components/store-provider";
 import type { Specialist } from "@/data/specialists";
+
+const AUTH_REQUIRED_MESSAGE =
+  "Чтобы записаться, вам необходимо для начала создать или войти в аккаунт.";
 
 /** Склонение слова «год» по числу лет опыта. */
 function yearsLabel(n: number) {
@@ -22,6 +26,13 @@ function yearsLabel(n: number) {
 /** Каталог специалистов с записью на консультацию. */
 export function SupportDirectory({ specialists }: { specialists: Specialist[] }) {
   const [selected, setSelected] = React.useState<Specialist | null>(null);
+  const { user, hydrated, openAuth } = useStore();
+
+  // Запись доступна только после входа в аккаунт.
+  function handleBook(s: Specialist) {
+    if (hydrated && user) setSelected(s);
+    else openAuth(AUTH_REQUIRED_MESSAGE);
+  }
 
   return (
     <>
@@ -75,7 +86,7 @@ export function SupportDirectory({ specialists }: { specialists: Specialist[] })
                 ))}
               </div>
 
-              <Button className="mt-5 w-full" onClick={() => setSelected(s)}>
+              <Button className="mt-5 w-full" onClick={() => handleBook(s)}>
                 Записаться на консультацию
               </Button>
             </CardContent>
