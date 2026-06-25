@@ -6,18 +6,15 @@ import { X, Check, Loader2, CalendarCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/components/store-provider";
+import { formatEventDate } from "@/lib/format";
 import type { Specialist } from "@/data/specialists";
 
 const fieldClass =
   "w-full rounded-xl border border-input bg-background px-3.5 py-2.5 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring";
 
-const timeSlots = [
-  "Будни, до 14:00",
-  "Будни, 14:00–18:00",
-  "Будни, после 18:00",
-  "Выходные",
-  "Любое время",
-];
+// Поля профиля — показываются заполненными, без возможности редактирования.
+const readonlyFieldClass =
+  "w-full cursor-not-allowed rounded-xl border border-input bg-secondary/50 px-3.5 py-2.5 text-sm text-muted-foreground";
 
 const topicOptions = [
   "Тревожность и стресс",
@@ -29,22 +26,20 @@ const topicOptions = [
 ];
 
 type FormState = {
-  name: string;
-  contact: string;
+  date: string;
   time: string;
   topic: string;
 };
 
 const emptyForm: FormState = {
-  name: "",
-  contact: "",
-  time: timeSlots[0],
+  date: "",
+  time: "",
   topic: topicOptions[0],
 };
 
 /**
  * Модальное окно записи на консультацию.
- * Открыто, когда передан `specialist`. Отправка имитируется — без реального запроса.
+ * Открыто, когда передан `specialist`. Имя и e-mail берутся из профиля.
  */
 export function BookingDialog({
   specialist,
@@ -53,7 +48,7 @@ export function BookingDialog({
   specialist: Specialist | null;
   onClose: () => void;
 }) {
-  const { addConsultation } = useStore();
+  const { user, addConsultation } = useStore();
   const [status, setStatus] = React.useState<"idle" | "submitting" | "success">(
     "idle"
   );
@@ -81,27 +76,27 @@ export function BookingDialog({
 
   const update =
     (key: keyof FormState) =>
-    (
-      e: React.ChangeEvent<
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >
-    ) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
       setForm((f) => ({ ...f, [key]: e.target.value }));
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!specialist) return;
     setStatus("submitting");
     // Имитация отправки заявки без реального обращения к серверу.
     setTimeout(() => {
       addConsultation({
         specialist: specialist.name,
         role: specialist.role,
+        date: form.date,
         time: form.time,
         topic: form.topic,
       });
       setStatus("success");
     }, 700);
   }
+
+  const successDate = form.date ? formatEventDate(form.date) : null;
 
   return (
     <div
@@ -139,27 +134,19 @@ export function BookingDialog({
               Заявка принята
             </h2>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Спасибо, {form.name || "друг"}! {specialist.name} получит вашу
-              заявку и свяжется с вами в удобное время:{" "}
-              <span className="font-medium text-foreground">{form.time}</span>.
+              Спасибо, {user?.name || "друг"}! {specialist.name} получит вашу
+              заявку на{" "}
+              <span className="font-medium text-foreground">
+                {successDate
+                  ? `${successDate.day} ${successDate.monthGen}`
+                  : "выбранную дату"}
+                {form.time ? `, ${form.time}` : ""}
+              </span>
+              .
             </p>
-            <p className="mt-3 rounded-xl bg-secondary/60 px-4 py-2 text-xs text-muted-foreground">
-              Это демонстрация — заявка никуда не отправляется.
-            </p>
-            <div className="mt-6 flex w-full flex-col gap-2 sm:flex-row sm:justify-center">
-              <Button onClick={onClose} className="sm:px-8">
-                Готово
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setStatus("idle");
-                  setForm(emptyForm);
-                }}
-              >
-                Записаться ещё раз
-              </Button>
-            </div>
+            <Button onClick={onClose} className="mt-6 sm:px-8">
+              Готово
+            </Button>
           </div>
         ) : (
           /* ─── Форма записи ─── */
@@ -183,53 +170,61 @@ export function BookingDialog({
             </div>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-              <div>
-                <label htmlFor="bk-name" className="mb-1.5 block text-sm font-medium">
-                  Имя
-                </label>
-                <input
-                  id="bk-name"
-                  required
-                  value={form.name}
-                  onChange={update("name")}
-                  placeholder="Как к вам обращаться"
-                  className={fieldClass}
-                />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="bk-name" className="mb-1.5 block text-sm font-medium">
+                    Имя
+                  </label>
+                  <input
+                    id="bk-name"
+                    readOnly
+                    value={user?.name ?? ""}
+                    className={readonlyFieldClass}
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="bk-email"
+                    className="mb-1.5 block text-sm font-medium"
+                  >
+                    E-mail
+                  </label>
+                  <input
+                    id="bk-email"
+                    readOnly
+                    value={user?.email ?? ""}
+                    className={readonlyFieldClass}
+                  />
+                </div>
               </div>
 
-              <div>
-                <label
-                  htmlFor="bk-contact"
-                  className="mb-1.5 block text-sm font-medium"
-                >
-                  Контакт (телефон или e-mail)
-                </label>
-                <input
-                  id="bk-contact"
-                  required
-                  value={form.contact}
-                  onChange={update("contact")}
-                  placeholder="+7 999 000-00-00 или you@mail.ru"
-                  className={fieldClass}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="bk-time" className="mb-1.5 block text-sm font-medium">
-                  Удобное время
-                </label>
-                <select
-                  id="bk-time"
-                  value={form.time}
-                  onChange={update("time")}
-                  className={fieldClass}
-                >
-                  {timeSlots.map((slot) => (
-                    <option key={slot} value={slot}>
-                      {slot}
-                    </option>
-                  ))}
-                </select>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="bk-date" className="mb-1.5 block text-sm font-medium">
+                    Дата
+                  </label>
+                  <input
+                    id="bk-date"
+                    type="date"
+                    required
+                    value={form.date}
+                    onChange={update("date")}
+                    className={fieldClass}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="bk-time" className="mb-1.5 block text-sm font-medium">
+                    Время
+                  </label>
+                  <input
+                    id="bk-time"
+                    type="time"
+                    required
+                    value={form.time}
+                    onChange={update("time")}
+                    className={fieldClass}
+                  />
+                </div>
               </div>
 
               <div>

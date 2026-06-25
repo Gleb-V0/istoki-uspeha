@@ -41,7 +41,7 @@ export function AccountClient() {
     setSubscription,
   } = useStore();
 
-  // Пока состояние не загружено из localStorage — ничего не показываем.
+  // До монтирования (гидратации) ничего не показываем, чтобы не было скачка.
   if (!hydrated) {
     return <div className="container py-24" />;
   }
@@ -151,20 +151,24 @@ export function AccountClient() {
               </div>
             ) : (
               <ul className="mt-4 space-y-3">
-                {consultations.map((c) => (
-                  <li
-                    key={c.id}
-                    className="rounded-2xl border bg-secondary/30 p-4"
-                  >
-                    <p className="font-medium">{c.specialist}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {c.role} · {c.topic}
-                    </p>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      Удобное время: {c.time}
-                    </p>
-                  </li>
-                ))}
+                {consultations.map((c) => {
+                  const dc = c.date ? formatEventDate(c.date) : null;
+                  return (
+                    <li
+                      key={c.id}
+                      className="rounded-2xl border bg-secondary/30 p-4"
+                    >
+                      <p className="font-medium">{c.specialist}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {c.role} · {c.topic}
+                      </p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {dc ? `${dc.day} ${dc.monthGen}` : "Дата уточняется"}
+                        {c.time ? `, ${c.time}` : ""}
+                      </p>
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </CardContent>

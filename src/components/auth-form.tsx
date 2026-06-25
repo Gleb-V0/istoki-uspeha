@@ -26,7 +26,7 @@ export function AuthForm({ onSuccess }: { onSuccess?: () => void }) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     // Имитация: никакой реальной проверки нет — сразу «входим».
-    login(form.name);
+    login(form.name, form.email);
     onSuccess?.();
     router.push("/account");
   }

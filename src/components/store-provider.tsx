@@ -6,6 +6,7 @@ export type Consultation = {
   id: string;
   specialist: string;
   role: string;
+  date: string;
   time: string;
   topic: string;
   createdAt: string;
@@ -20,7 +21,7 @@ export type EventBooking = {
   createdAt: string;
 };
 
-export type User = { name: string } | null;
+export type User = { name: string; email: string } | null;
 export type Subscription = "free" | "premium";
 
 type Persisted = {
@@ -34,7 +35,7 @@ type Store = Persisted & {
   hydrated: boolean;
   authOpen: boolean;
   authMessage: string | null;
-  login: (name: string) => void;
+  login: (name: string, email: string) => void;
   logout: () => void;
   openAuth: (message?: string) => void;
   closeAuth: () => void;
@@ -42,8 +43,6 @@ type Store = Persisted & {
   addEvent: (e: Omit<EventBooking, "id" | "createdAt">) => void;
   setSubscription: (s: Subscription) => void;
 };
-
-const KEY = "istoki-store-v1";
 
 const defaultData: Persisted = {
   user: null,
@@ -65,41 +64,32 @@ export function useStore(): Store {
   return ctx;
 }
 
-/** Глобальное состояние демо-приложения с сохранением в localStorage. */
+/**
+ * Глобальное состояние демо-приложения — только в памяти.
+ * Ничего не сохраняется, поэтому при перезагрузке страницы всё сбрасывается
+ * к исходному состоянию (выход из аккаунта, тариф, записи и т.д.).
+ */
 export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [data, setData] = React.useState<Persisted>(defaultData);
   const [authOpen, setAuthOpen] = React.useState(false);
   const [authMessage, setAuthMessage] = React.useState<string | null>(null);
   const [hydrated, setHydrated] = React.useState(false);
 
-  // Загрузка сохранённого состояния после монтирования (избегаем рассинхрона SSR).
+  // Помечаем готовность после монтирования (без загрузки из хранилища).
   React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(KEY);
-      if (raw) setData({ ...defaultData, ...JSON.parse(raw) });
-    } catch {
-      /* игнорируем */
-    }
     setHydrated(true);
   }, []);
-
-  // Сохранение при изменениях.
-  React.useEffect(() => {
-    if (!hydrated) return;
-    try {
-      localStorage.setItem(KEY, JSON.stringify(data));
-    } catch {
-      /* игнорируем */
-    }
-  }, [data, hydrated]);
 
   const value: Store = {
     ...data,
     hydrated,
     authOpen,
     authMessage,
-    login: (name) =>
-      setData((d) => ({ ...d, user: { name: name.trim() || "Друг" } })),
+    login: (name, email) =>
+      setData((d) => ({
+        ...d,
+        user: { name: name.trim() || "Друг", email: email.trim() },
+      })),
     logout: () => setData((d) => ({ ...d, user: null })),
     openAuth: (message) => {
       setAuthMessage(typeof message === "string" ? message : null);
