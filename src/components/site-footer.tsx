@@ -48,9 +48,8 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 border-t pt-6 text-sm text-muted-foreground">
           <p>© {year} «Истоки успеха». Все права защищены.</p>
-          <p>Базовый доступ к платформе — бесплатно.</p>
         </div>
       </div>
     </footer>
