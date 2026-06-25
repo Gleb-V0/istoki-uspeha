@@ -9,17 +9,9 @@ import { PayButton } from "@/components/pay-button";
 
 export const metadata: Metadata = { title: "Оформление подписки" };
 
-const planInfo: Record<string, { name: string; price: string; period: string }> = {
-  premium: { name: "Премиум", price: "990 ₽", period: "в месяц" },
-};
+const plan = { name: "Премиум", price: "990 ₽", period: "в месяц" };
 
-export default function CheckoutPage({
-  searchParams,
-}: {
-  searchParams: { plan?: string };
-}) {
-  const plan = planInfo[searchParams.plan ?? "premium"] ?? planInfo.premium;
-
+export default function CheckoutPage() {
   return (
     <section className="brand-gradient">
       <div className="container flex flex-col items-center py-20 sm:py-28">
