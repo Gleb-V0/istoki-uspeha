@@ -12,6 +12,8 @@ export type Story = {
   slug: string;
   /** Имя героя истории. */
   name: string;
+  /** Портрет (фото-заглушка; заменяется на реальное лицензированное фото). */
+  photo: string;
   /** Кто этот человек: краткая роль/достижение. */
   role: string;
   /** Сфера деятельности. */
@@ -37,6 +39,7 @@ export const stories: Story[] = [
     id: "1",
     slug: "ot-trevogi-k-svoemu-delu",
     name: "Анна Сорокина",
+    photo: "https://randomuser.me/api/portraits/women/65.jpg",
     role: "Основательница образовательного стартапа",
     field: "Предпринимательство",
     challenge: "Сильная тревожность и страх ошибки в старших классах",
@@ -61,6 +64,7 @@ export const stories: Story[] = [
     id: "2",
     slug: "vygoranie-pered-ege",
     name: "Дмитрий Власов",
+    photo: "https://randomuser.me/api/portraits/men/32.jpg",
     role: "Исследователь, аспирант физического факультета",
     field: "Наука",
     challenge: "Выгорание при подготовке к ЕГЭ и олимпиадам",
@@ -85,6 +89,7 @@ export const stories: Story[] = [
     id: "3",
     slug: "odinochestvo-i-tvorchestvo",
     name: "Карина Мельник",
+    photo: "https://randomuser.me/api/portraits/women/44.jpg",
     role: "Иллюстратор и арт-директор",
     field: "Искусство",
     challenge: "Чувство одиночества и непонимания среди сверстников",
@@ -109,6 +114,7 @@ export const stories: Story[] = [
     id: "4",
     slug: "posle-neudachi-na-sobesedovanii",
     name: "Тимур Ахметов",
+    photo: "https://randomuser.me/api/portraits/men/75.jpg",
     role: "Разработчик, ментор студенческих команд",
     field: "Технологии",
     challenge: "Серия отказов и синдром самозванца",
@@ -132,6 +138,7 @@ export const stories: Story[] = [
     id: "5",
     slug: "sport-i-disciplina-bez-davleniya",
     name: "Ольга Рудова",
+    photo: "https://randomuser.me/api/portraits/women/23.jpg",
     role: "Мастер спорта, тренер по лёгкой атлетике",
     field: "Спорт",
     challenge: "Давление результатов и страх подвести команду",
@@ -156,6 +163,7 @@ export const stories: Story[] = [
     id: "6",
     slug: "volonterstvo-kak-tochka-opory",
     name: "Никита Громов",
+    photo: "https://randomuser.me/api/portraits/men/51.jpg",
     role: "Координатор волонтёрских программ",
     field: "Общество",
     challenge: "Потеря смысла и непонимание, чего хочется от жизни",
@@ -180,6 +188,7 @@ export const stories: Story[] = [
     id: "7",
     slug: "panicheskie-ataki-i-medicina",
     name: "Полина Нестерова",
+    photo: "https://randomuser.me/api/portraits/women/12.jpg",
     role: "Врач-педиатр, ординатор",
     field: "Медицина",
     challenge: "Панические атаки и страх не справиться с нагрузкой",
@@ -204,6 +213,7 @@ export const stories: Story[] = [
     id: "8",
     slug: "proval-pervogo-biznesa",
     name: "Руслан Хаялов",
+    photo: "https://randomuser.me/api/portraits/men/83.jpg",
     role: "Предприниматель, основатель IT-компании",
     field: "Предпринимательство",
     challenge: "Провал первого проекта и страх начать заново",
@@ -222,6 +232,31 @@ export const stories: Story[] = [
     ],
     readingTime: 7,
     tags: ["провал", "устойчивость", "бизнес"],
+  },
+  {
+    id: "9",
+    slug: "apatiya-i-strah-sceny",
+    name: "Максим Орлов",
+    photo: "https://randomuser.me/api/portraits/men/5.jpg",
+    role: "Музыкант и саунд-продюсер",
+    field: "Искусство",
+    challenge: "Апатия, потеря интереса и страх сцены",
+    excerpt:
+      "Максим забросил музыку из-за апатии и страха выступать. Маленькие шаги и поддержка вернули ему интерес — теперь он пишет музыку и выступает.",
+    quote:
+      "Я ждал, когда вернётся вдохновение. А оно вернулось только после того, как я снова начал что-то делать.",
+    content: [
+      "В старших классах Максим, который раньше не выпускал гитару из рук, вдруг перестал чувствовать к музыке что-либо. Апатия накрыла всё: уроки, друзей, любимое хобби. А мысль о выступлении на сцене вызывала настоящий ужас.",
+      "Он почти убедил себя, что «перерос» музыку. Но в разговоре с коучем понял, что дело не в потере таланта, а в состоянии. Они начали с крошечных шагов: пять минут игры в день, запись коротких набросков «в стол», выступление сначала перед одним другом.",
+      "Интерес возвращался медленно, вслед за действиями, а не наоборот. Сегодня Максим пишет музыку и спокойно выступает, а страх сцены превратился в обычное волнение, с которым он умеет работать.",
+    ],
+    takeaways: [
+      "Апатия — это состояние, из которого есть выход, а не конец увлечения.",
+      "Действие часто идёт первым, а интерес и вдохновение — за ним.",
+      "Маленькие шаги возвращают то, что кажется потерянным навсегда.",
+    ],
+    readingTime: 5,
+    tags: ["апатия", "страх сцены", "творчество"],
   },
 ];
 

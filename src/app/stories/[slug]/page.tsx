@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Quote, Lightbulb, ArrowRight } from "lucide-react";
@@ -24,15 +25,6 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-}
-
 export default function StoryPage({ params }: { params: Params }) {
   const story = getStoryBySlug(params.slug);
   if (!story) notFound();
@@ -53,12 +45,14 @@ export default function StoryPage({ params }: { params: Params }) {
           </Button>
 
           <div className="flex items-center gap-4">
-            <span
-              className="flex h-16 w-16 shrink-0 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-500 to-brand-700 text-lg font-semibold text-white shadow-sm"
-              aria-hidden
-            >
-              {initials(story.name)}
-            </span>
+            <Image
+              src={story.photo}
+              alt={`Фото: ${story.name}`}
+              width={80}
+              height={80}
+              className="h-20 w-20 shrink-0 rounded-3xl object-cover shadow-sm ring-1 ring-border"
+              priority
+            />
             <div>
               <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
                 {story.name}

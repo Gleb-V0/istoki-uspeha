@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 
@@ -5,28 +6,19 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Story } from "@/data/stories";
 
-/** Инициалы для аватара по имени. */
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-}
-
 /** Карточка истории успеха в ленте. Вся карточка — ссылка на полную историю. */
 export function StoryCard({ story }: { story: Story }) {
   return (
     <Card className="group relative flex flex-col overflow-hidden hover:shadow-md focus-within:ring-2 focus-within:ring-ring">
       <CardContent className="flex flex-1 flex-col p-6">
         <div className="flex items-center gap-3">
-          <span
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-semibold text-white shadow-sm"
-            aria-hidden
-          >
-            {initials(story.name)}
-          </span>
+          <Image
+            src={story.photo}
+            alt={`Фото: ${story.name}`}
+            width={56}
+            height={56}
+            className="h-14 w-14 shrink-0 rounded-2xl object-cover shadow-sm ring-1 ring-border"
+          />
           <div className="min-w-0">
             <h3 className="truncate text-base font-semibold tracking-tight">
               {story.name}
