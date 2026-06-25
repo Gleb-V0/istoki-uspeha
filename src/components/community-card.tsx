@@ -6,13 +6,12 @@ import {
   HeartPulse,
   Palette,
   Users,
-  Lock,
-  Send,
   type LucideIcon,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { ChatInput } from "@/components/chat-input";
 import type { Community } from "@/data/communities";
 
 const iconMap: Record<Community["icon"], LucideIcon> = {
@@ -91,12 +90,8 @@ export function CommunityCard({ community }: { community: Community }) {
           </div>
         ))}
 
-        {/* Имитация поля ввода (неактивно — нужен вход) */}
-        <div className="mt-1 flex items-center gap-2 rounded-full border bg-background px-3.5 py-2 text-sm text-muted-foreground">
-          <Lock className="h-4 w-4 shrink-0" />
-          <span className="flex-1 truncate">Войдите, чтобы писать в чат</span>
-          <Send className="h-4 w-4 shrink-0 opacity-40" />
-        </div>
+        {/* Поле ввода: активно после входа, иначе «запертая» плашка */}
+        <ChatInput />
       </div>
     </Card>
   );

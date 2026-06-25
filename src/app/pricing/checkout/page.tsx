@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CreditCard, ArrowLeft, Crown, Lock } from "lucide-react";
+import { CreditCard, ArrowLeft, Crown } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { DemoSubscribeButton } from "@/components/demo-subscribe-button";
+import { PayButton } from "@/components/pay-button";
 
 export const metadata: Metadata = { title: "Оформление подписки" };
 
@@ -23,22 +23,13 @@ export default function CheckoutPage({
   return (
     <section className="brand-gradient">
       <div className="container flex flex-col items-center py-20 sm:py-28">
-        <Badge variant="soft" className="gap-1.5">
-          <Lock className="h-3.5 w-3.5" />
-          Демо-режим
-        </Badge>
-
-        <span className="mt-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-sm">
+        <span className="flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-sm">
           <CreditCard className="h-8 w-8" />
         </span>
 
         <h1 className="mt-6 text-center text-3xl font-bold tracking-tight sm:text-4xl">
           Оформление подписки
         </h1>
-        <p className="mt-3 max-w-xl text-center text-base leading-relaxed text-muted-foreground">
-          Это демонстрационная версия — онлайн-оплата ещё не подключена. В
-          рабочей версии здесь будет безопасная оплата подписки.
-        </p>
 
         {/* Сводка по выбранному плану */}
         <Card className="mt-8 w-full max-w-sm">
@@ -66,7 +57,7 @@ export default function CheckoutPage({
         </Card>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <DemoSubscribeButton />
+          <PayButton />
           <Button asChild variant="outline">
             <Link href="/pricing">
               <ArrowLeft className="h-4 w-4" />

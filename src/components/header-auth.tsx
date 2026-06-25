@@ -30,7 +30,7 @@ export function HeaderAuth() {
       onClick={openAuth}
     >
       <LogIn className="h-4 w-4" />
-      Войти / Регистрация
+      Вход / Регистрация
     </Button>
   );
 }

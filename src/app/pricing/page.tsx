@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import {
-  Check,
-  Minus,
-  Sparkles,
-  Crown,
-  ArrowRight,
-  Stethoscope,
-  ShieldCheck,
-} from "lucide-react";
+import { Check, Minus, Sparkles, Crown, Stethoscope, ShieldCheck } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { PlanCta } from "@/components/plan-cta";
 
 export const metadata: Metadata = {
   title: "Тарифы",
@@ -21,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 type Plan = {
+  key: "free" | "premium";
   name: string;
   price: string;
   period?: string;
@@ -33,6 +25,7 @@ type Plan = {
 
 const plans: Plan[] = [
   {
+    key: "free",
     name: "Бесплатный",
     price: "0 ₽",
     tagline: "Базовый доступ ко всему главному — навсегда бесплатно.",
@@ -47,6 +40,7 @@ const plans: Plan[] = [
     highlighted: false,
   },
   {
+    key: "premium",
     name: "Премиум",
     price: "990 ₽",
     period: "/ мес",
@@ -160,17 +154,11 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                <Button
-                  asChild
-                  size="lg"
-                  variant={plan.highlighted ? "default" : "outline"}
-                  className="mt-7 w-full"
-                >
-                  <Link href={plan.href}>
-                    {plan.cta}
-                    {plan.highlighted && <ArrowRight className="h-4 w-4" />}
-                  </Link>
-                </Button>
+                <PlanCta
+                  planKey={plan.key}
+                  href={plan.href}
+                  label={plan.cta}
+                />
               </CardContent>
             </Card>
           ))}

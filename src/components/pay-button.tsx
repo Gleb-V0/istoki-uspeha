@@ -1,13 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Crown } from "lucide-react";
+import { CreditCard } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/components/store-provider";
 
-/** Демо-оформление подписки: без оплаты включает Премиум и ведёт в кабинет. */
-export function DemoSubscribeButton() {
+/** Кнопка оплаты: включает Премиум и ведёт на экран успешной оплаты. */
+export function PayButton() {
   const router = useRouter();
   const { setSubscription } = useStore();
 
@@ -15,11 +15,11 @@ export function DemoSubscribeButton() {
     <Button
       onClick={() => {
         setSubscription("premium");
-        router.push("/account");
+        router.push("/pricing/success");
       }}
     >
-      <Crown className="h-4 w-4" />
-      Оформить в демо-режиме
+      <CreditCard className="h-4 w-4" />
+      Оплатить
     </Button>
   );
 }
