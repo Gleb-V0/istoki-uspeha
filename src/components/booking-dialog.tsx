@@ -6,6 +6,7 @@ import { X, Check, Loader2, CalendarCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/components/store-provider";
+import { asset } from "@/lib/utils";
 import { formatEventDate } from "@/lib/format";
 import type { Specialist } from "@/data/specialists";
 
@@ -153,7 +154,7 @@ export function BookingDialog({
           <>
             <div className="flex items-center gap-3 pr-8">
               <Image
-                src={specialist.photo}
+                src={asset(specialist.photo)}
                 alt={`Фото: ${specialist.name}`}
                 width={48}
                 height={48}

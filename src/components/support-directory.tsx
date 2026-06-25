@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookingDialog } from "@/components/booking-dialog";
 import { useStore } from "@/components/store-provider";
+import { asset } from "@/lib/utils";
 import type { Specialist } from "@/data/specialists";
 
 const AUTH_REQUIRED_MESSAGE =
@@ -42,7 +43,7 @@ export function SupportDirectory({ specialists }: { specialists: Specialist[] })
             <CardContent className="flex flex-1 flex-col p-6">
               <div className="flex items-center gap-3">
                 <Image
-                  src={s.photo}
+                  src={asset(s.photo)}
                   alt={`Фото: ${s.name}`}
                   width={64}
                   height={64}

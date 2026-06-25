@@ -7,6 +7,7 @@ import { ArrowLeft, Clock, Quote, Lightbulb, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { StoryCard } from "@/components/story-card";
+import { asset } from "@/lib/utils";
 import { stories, getStoryBySlug } from "@/data/stories";
 
 type Params = { slug: string };
@@ -46,7 +47,7 @@ export default function StoryPage({ params }: { params: Params }) {
 
           <div className="flex items-center gap-4">
             <Image
-              src={story.photo}
+              src={asset(story.photo)}
               alt={`Фото: ${story.name}`}
               width={80}
               height={80}

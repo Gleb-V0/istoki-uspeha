@@ -4,6 +4,7 @@ import { ArrowRight, Clock } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { asset } from "@/lib/utils";
 import type { Story } from "@/data/stories";
 
 /** Карточка истории успеха в ленте. Вся карточка — ссылка на полную историю. */
@@ -13,7 +14,7 @@ export function StoryCard({ story }: { story: Story }) {
       <CardContent className="flex flex-1 flex-col p-6">
         <div className="flex items-center gap-3">
           <Image
-            src={story.photo}
+            src={asset(story.photo)}
             alt={`Фото: ${story.name}`}
             width={56}
             height={56}
