@@ -261,10 +261,6 @@ export function BookingDialog({
                   </>
                 )}
               </Button>
-
-              <p className="text-center text-xs text-muted-foreground">
-                Демо-форма: данные не отправляются на сервер.
-              </p>
             </form>
           </>
         )}
