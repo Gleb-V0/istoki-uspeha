@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { StoreProvider } from "@/components/store-provider";
+import { AuthDialog } from "@/components/auth-dialog";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -35,9 +37,12 @@ export default function RootLayout({
   return (
     <html lang="ru" className={inter.variable}>
       <body className="flex min-h-dvh flex-col font-sans">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <StoreProvider>
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+          <AuthDialog />
+        </StoreProvider>
       </body>
     </html>
   );

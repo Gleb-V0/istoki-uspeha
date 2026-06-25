@@ -5,6 +5,7 @@ import { CreditCard, ArrowLeft, Crown, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { DemoSubscribeButton } from "@/components/demo-subscribe-button";
 
 export const metadata: Metadata = { title: "Оформление подписки" };
 
@@ -65,14 +66,12 @@ export default function CheckoutPage({
         </Card>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <DemoSubscribeButton />
           <Button asChild variant="outline">
             <Link href="/pricing">
               <ArrowLeft className="h-4 w-4" />
               Назад к тарифам
             </Link>
-          </Button>
-          <Button asChild>
-            <Link href="/">На главную</Link>
           </Button>
         </div>
       </div>

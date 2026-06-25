@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, Check, Loader2, CalendarCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useStore } from "@/components/store-provider";
 import type { Specialist } from "@/data/specialists";
 
 const fieldClass =
@@ -52,6 +53,7 @@ export function BookingDialog({
   specialist: Specialist | null;
   onClose: () => void;
 }) {
+  const { addConsultation } = useStore();
   const [status, setStatus] = React.useState<"idle" | "submitting" | "success">(
     "idle"
   );
@@ -90,7 +92,15 @@ export function BookingDialog({
     e.preventDefault();
     setStatus("submitting");
     // Имитация отправки заявки без реального обращения к серверу.
-    setTimeout(() => setStatus("success"), 700);
+    setTimeout(() => {
+      addConsultation({
+        specialist: specialist.name,
+        role: specialist.role,
+        time: form.time,
+        topic: form.topic,
+      });
+      setStatus("success");
+    }, 700);
   }
 
   return (

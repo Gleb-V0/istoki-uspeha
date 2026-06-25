@@ -5,6 +5,7 @@ import { X, Check, Loader2, CalendarCheck, Clock } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useStore } from "@/components/store-provider";
 import type { PlatformEvent } from "@/data/events";
 import { formatEventDate } from "@/lib/format";
 
@@ -25,6 +26,7 @@ export function EventRegisterDialog({
   event: PlatformEvent | null;
   onClose: () => void;
 }) {
+  const { addEvent } = useStore();
   const [status, setStatus] = React.useState<"idle" | "submitting" | "success">(
     "idle"
   );
@@ -58,7 +60,15 @@ export function EventRegisterDialog({
     e.preventDefault();
     setStatus("submitting");
     // Имитация записи без реального обращения к серверу.
-    setTimeout(() => setStatus("success"), 700);
+    setTimeout(() => {
+      addEvent({
+        title: event.title,
+        date: event.date,
+        time: event.time,
+        speaker: event.speaker,
+      });
+      setStatus("success");
+    }, 700);
   }
 
   return (

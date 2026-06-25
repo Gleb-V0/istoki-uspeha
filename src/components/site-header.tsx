@@ -1,10 +1,7 @@
-import Link from "next/link";
-import { LogIn } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
+import { HeaderAuth } from "@/components/header-auth";
 
 /** Адаптивная шапка сайта: логотип, навигация, вход и мобильное меню. */
 export function SiteHeader() {
@@ -16,12 +13,7 @@ export function SiteHeader() {
         <MainNav />
 
         <div className="flex items-center gap-2">
-          <Button asChild variant="outline" size="sm" className="hidden sm:inline-flex">
-            <Link href="/login">
-              <LogIn className="h-4 w-4" />
-              Войти
-            </Link>
-          </Button>
+          <HeaderAuth />
           <MobileNav />
         </div>
       </div>

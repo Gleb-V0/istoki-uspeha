@@ -3,16 +3,18 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, LogIn } from "lucide-react";
+import { Menu, X, LogIn, LayoutDashboard } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { mainNav } from "@/data/navigation";
+import { useStore } from "@/components/store-provider";
 
 /** Мобильное меню: кнопка-гамбургер раскрывает выпадающую панель навигации. */
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
+  const { user, hydrated, openAuth } = useStore();
 
   // Закрываем меню при переходе на новый маршрут.
   React.useEffect(() => {
@@ -60,12 +62,25 @@ export function MobileNav() {
               );
             })}
 
-            <Button asChild className="mt-2 w-full">
-              <Link href="/login">
+            {hydrated && user ? (
+              <Button asChild className="mt-2 w-full">
+                <Link href="/account">
+                  <LayoutDashboard className="h-4 w-4" />
+                  Личный кабинет
+                </Link>
+              </Button>
+            ) : (
+              <Button
+                className="mt-2 w-full"
+                onClick={() => {
+                  setOpen(false);
+                  openAuth();
+                }}
+              >
                 <LogIn className="h-4 w-4" />
-                Войти
-              </Link>
-            </Button>
+                Войти / Регистрация
+              </Button>
+            )}
           </nav>
         </div>
       )}
